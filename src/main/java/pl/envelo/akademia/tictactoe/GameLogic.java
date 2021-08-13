@@ -82,18 +82,18 @@ public class GameLogic {
     private static boolean checkDiagonals(int currentPlayer) {
         int[][] board = GameUtils.getGameBoardObject().getBoard();
 
-        int leftBias = 0;
-        int rightBias = 0;
+        int leftDiagonal = 0;
+        int rightDiagonal = 0;
 
         for (int i = 1; i < board.length; i++) {
             if (board[i][i] == currentPlayer) {
-                ++leftBias;
+                ++leftDiagonal;
             }
             if (board[board.length - i][i] == currentPlayer) {
-                ++rightBias;
+                ++rightDiagonal;
             }
         }
 
-        return rightBias == board.length - 1 || leftBias == board.length - 1;
+        return rightDiagonal == board.length - 1 || leftDiagonal == board.length - 1;
     }
 }
