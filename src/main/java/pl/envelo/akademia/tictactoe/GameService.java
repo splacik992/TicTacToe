@@ -4,7 +4,6 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.Scanner;
 
-//stan gry
 public class GameService {
     private static boolean firstPlayer = true;
 
@@ -51,7 +50,7 @@ public class GameService {
                 if (Integer.parseInt(x) > GameUtils.getGameBoardObject().getBoard().length - 1 ||
                         Integer.parseInt(y) > GameUtils.getGameBoardObject().getBoard().length - 1
                         || Integer.parseInt(x) < 1 || Integer.parseInt(y) < 1) {
-                    System.out.println("Wpółrzędne wychodzą poza zakres planszy!");
+                    System.out.println(MessageUtils.COORDINATES_OUT_OF_RANGE);
                 } else {
                     if (GameLogic.makeMove(Integer.parseInt(x), Integer.parseInt(y), firstPlayer)) {
                         GameStatus status = GameLogic.checkIfWin(firstPlayer);
@@ -66,11 +65,11 @@ public class GameService {
                         break;
 
                     } else {
-                        System.out.println("To pole jest już zajęte");
+                        System.out.println(MessageUtils.THE_FIELD_IS_OCCUPIED);
                     }
                 }
             } else {
-                System.out.println("Niepoprawne współrzędne");
+                System.out.println(MessageUtils.INVALID_COORDINATES);
             }
         }
     }
@@ -86,7 +85,7 @@ public class GameService {
             GameUtils.getGameBoardObject().createNewBoard(size);
 
         } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException(MessageUtils.INVALID_INPUT_SIZE_MESSAGE);
+            throw new IllegalArgumentException(MessageUtils.INVALID_INPUT_SIZE);
         }
     }
 
@@ -97,13 +96,13 @@ public class GameService {
             String choice = scanner.next();
             if (StringUtils.isNumeric(choice)) {
                 if (Integer.parseInt(choice) <= 2) {
-                    System.out.println(MessageUtils.INVALID_INPUT_SIZE_MESSAGE);
+                    System.out.println(MessageUtils.INVALID_INPUT_SIZE);
                 } else {
                     createBoard(choice);
                     break;
                 }
             } else {
-                System.out.println("Podana wartość musi być liczbą!");
+                System.out.println(MessageUtils.INVALID_INPUT_SIZE);
             }
         }
     }

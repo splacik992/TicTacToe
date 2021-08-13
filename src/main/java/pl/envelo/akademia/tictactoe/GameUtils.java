@@ -5,7 +5,6 @@ public class GameUtils {
 
     private static Board board;
 
-
     public static Board getGameBoardObject() {
         return board;
     }

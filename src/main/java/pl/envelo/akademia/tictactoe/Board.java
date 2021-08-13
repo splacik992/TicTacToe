@@ -1,12 +1,8 @@
 package pl.envelo.akademia.tictactoe;
 
-import java.util.Arrays;
-
-//tablica
 public class Board {
 
     private int[][] board;
-
 
     public void createNewBoard(int n) {
         int[][] arr = new int[n + 1][n + 1];
@@ -41,8 +37,6 @@ public class Board {
             return "- ";
         }
     }
-
-
 
     public int[][] getBoard() {
         return board;

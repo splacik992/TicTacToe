@@ -1,9 +1,8 @@
 package pl.envelo.akademia.tictactoe;
 
-
 public class GameLogic {
 
-    private static int moveCouter = 0;
+    private static int moveCounter = 0;
 
     public static boolean makeMove(int x, int y, boolean firstPlayer) {
         int[][] board = GameUtils.getGameBoardObject().getBoard();
@@ -12,22 +11,23 @@ public class GameLogic {
             int currentPlayer = firstPlayer ? 1 : 2;
             board[x][y] = currentPlayer;
             GameUtils.getGameBoardObject().setBoard(board);
-            moveCouter++;
+            ++moveCounter;
             return true;
         } else {
             return false;
         }
     }
 
-    //zmian na actual player
     public static GameStatus checkIfWin(boolean firstPlayer) {
         int currentPlayer = firstPlayer ? 1 : 2;
 
-        if (checkBiases(currentPlayer) ||
+        if (checkDiagonals(currentPlayer) ||
                 checkHorizontal(currentPlayer) ||
                 checkVertical(currentPlayer)) {
+            moveCounter = 0;
             return GameStatus.WIN;
         } else if (checkIfDraw()) {
+            moveCounter = 0;
             return GameStatus.DRAW;
         }
 
@@ -37,7 +37,7 @@ public class GameLogic {
     private static boolean checkIfDraw() {
         int[][] board = GameUtils.getGameBoardObject().getBoard();
 
-        return moveCouter == Math.pow(board.length - 1, 2);
+        return moveCounter == Math.pow(board.length - 1, 2);
     }
 
     private static boolean checkVertical(int currentPlayer) {
@@ -79,7 +79,7 @@ public class GameLogic {
         return false;
     }
 
-    private static boolean checkBiases(int currentPlayer) {
+    private static boolean checkDiagonals(int currentPlayer) {
         int[][] board = GameUtils.getGameBoardObject().getBoard();
 
         int leftBias = 0;
