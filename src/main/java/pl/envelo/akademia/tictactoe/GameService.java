@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class GameService {
 
     private static boolean firstPlayer = true;
-    private static final Scanner scanner = new Scanner(System.in);
+    private static Scanner scanner = new Scanner(System.in);
 
     public static void run() {
         while (true) {
@@ -78,6 +78,8 @@ public class GameService {
 
     private static void playerMove() {
         while (true) {
+            scanner = new Scanner(System.in);
+
             System.out.println("Podaj wspolrzedna Y:");
             String x = scanner.next();
 
