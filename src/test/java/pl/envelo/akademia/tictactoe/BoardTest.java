@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class BoardTest {
 
-
     @Test
     void shouldCreateNewBoard() {
         Board board = new Board();

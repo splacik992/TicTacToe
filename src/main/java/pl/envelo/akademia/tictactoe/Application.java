@@ -1,8 +1,9 @@
 package pl.envelo.akademia.tictactoe;
-//run
-public class Main {
+
+public class Application {
 
     public static void main(String[] args) {
         GameService.run();
     }
+
 }
