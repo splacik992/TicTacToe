@@ -17,14 +17,13 @@ public class GameService {
                     0. Zakończ gre""");
 
             switch (scanner.next()) {
-                case "1":
-                    runGame();
-                    break;
-                case "0":
-                    System.exit(0);
+                case "1" -> runGame();
+                case "0" -> {
                     System.out.println("Dzięki za gre :)");
-                default:
-                    System.out.println("Podana opcja nie istnieje");
+                    scanner.close();
+                    System.exit(0);
+                }
+                default -> System.out.println("Podana opcja nie istnieje");
             }
         }
     }
