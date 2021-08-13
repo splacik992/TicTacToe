@@ -8,11 +8,13 @@ class BoardTest {
 
 
     @Test
-    void shouldThrowIllegalArgumentExceptionWhenBoardSizeIsLessThan3() {
-
+    void shouldCreateNewBoard() {
         Board board = new Board();
+        board.createNewBoard(5);
 
-        assertThrows(IllegalArgumentException.class, () -> board.createNewBoard(2));
+        int sizeOfTable = board.getBoard().length;
+
+        assertEquals(6, sizeOfTable);
     }
 
 }
