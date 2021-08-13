@@ -1,6 +1,10 @@
-package pl.envelo.akademia.tictactoe;
+package pl.envelo.akademia.tictactoe.service;
 
 import org.apache.commons.lang3.StringUtils;
+import pl.envelo.akademia.tictactoe.model.Board;
+import pl.envelo.akademia.tictactoe.utils.GameStatus;
+import pl.envelo.akademia.tictactoe.utils.GameUtils;
+import pl.envelo.akademia.tictactoe.utils.MessageUtils;
 
 import java.util.Scanner;
 

@@ -1,6 +1,10 @@
 package pl.envelo.akademia.tictactoe;
 
 import org.junit.jupiter.api.Test;
+import pl.envelo.akademia.tictactoe.model.Board;
+import pl.envelo.akademia.tictactoe.service.GameLogic;
+import pl.envelo.akademia.tictactoe.utils.GameStatus;
+import pl.envelo.akademia.tictactoe.utils.GameUtils;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

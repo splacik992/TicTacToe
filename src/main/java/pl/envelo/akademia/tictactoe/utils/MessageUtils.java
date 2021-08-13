@@ -1,4 +1,4 @@
-package pl.envelo.akademia.tictactoe;
+package pl.envelo.akademia.tictactoe.utils;
 
 public class MessageUtils {
     public final static String THE_FIELD_IS_OCCUPIED = "To pole jest już zajęte";

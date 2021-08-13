@@ -1,4 +1,7 @@
-package pl.envelo.akademia.tictactoe;
+package pl.envelo.akademia.tictactoe.service;
+
+import pl.envelo.akademia.tictactoe.utils.GameStatus;
+import pl.envelo.akademia.tictactoe.utils.GameUtils;
 
 public class GameLogic {
 

@@ -1,6 +1,7 @@
 package pl.envelo.akademia.tictactoe;
 
 import org.junit.jupiter.api.Test;
+import pl.envelo.akademia.tictactoe.model.Board;
 
 import static org.junit.jupiter.api.Assertions.*;
 

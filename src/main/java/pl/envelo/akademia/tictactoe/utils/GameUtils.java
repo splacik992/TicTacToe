@@ -1,4 +1,6 @@
-package pl.envelo.akademia.tictactoe;
+package pl.envelo.akademia.tictactoe.utils;
+
+import pl.envelo.akademia.tictactoe.model.Board;
 
 public class GameUtils {
     public static boolean isGameActive;
