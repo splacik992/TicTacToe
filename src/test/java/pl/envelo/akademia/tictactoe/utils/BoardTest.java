@@ -1,4 +1,4 @@
-package pl.envelo.akademia.tictactoe;
+package pl.envelo.akademia.tictactoe.utils;
 
 import org.junit.jupiter.api.Test;
 import pl.envelo.akademia.tictactoe.model.Board;

@@ -1,4 +1,4 @@
-package pl.envelo.akademia.tictactoe;
+package pl.envelo.akademia.tictactoe.service;
 
 import org.junit.jupiter.api.Test;
 import pl.envelo.akademia.tictactoe.model.Board;
@@ -7,6 +7,7 @@ import pl.envelo.akademia.tictactoe.utils.GameStatus;
 import pl.envelo.akademia.tictactoe.utils.GameUtils;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 class GameLogicTest {
 
@@ -37,13 +38,34 @@ class GameLogicTest {
     }
 
     @Test
-    void shouldReturnWinForDiagonal(){
+    void shouldReturnFalseWhenPlayerTryToChooseTakenPoint() {
+        Board board = new Board();
+        board.createNewBoard(3);
+        GameUtils.setBoard(board);
+        GameLogic.makeMove(1, 1, true);
+
+        assertFalse(GameLogic.makeMove(1, 1, true));
+    }
+
+    @Test
+    void shouldReturnWinForLeftDiagonal(){
         Board board = new Board();
         board.createNewBoard(3);
         GameUtils.setBoard(board);
         GameLogic.makeMove(1, 1, true);
         GameLogic.makeMove(2, 2, true);
         GameLogic.makeMove(3, 3, true);
+        assertEquals(GameStatus.WIN, GameLogic.checkIfWin(true));
+    }
+
+    @Test
+    void shouldReturnWinForRightDiagonal(){
+        Board board = new Board();
+        board.createNewBoard(3);
+        GameUtils.setBoard(board);
+        GameLogic.makeMove(1, 3, true);
+        GameLogic.makeMove(2, 2, true);
+        GameLogic.makeMove(3, 1, true);
         assertEquals(GameStatus.WIN, GameLogic.checkIfWin(true));
     }
 

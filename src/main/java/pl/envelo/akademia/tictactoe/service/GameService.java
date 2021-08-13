@@ -63,14 +63,9 @@ public class GameService {
     }
 
     private static void createBoard(String n) {
-        try {
-            int size = Integer.parseInt(n);
-            GameUtils.setBoard(new Board());
-            GameUtils.getGameBoardObject().createNewBoard(size);
-
-        } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException(MessageUtils.INVALID_INPUT_SIZE);
-        }
+        int size = Integer.parseInt(n);
+        GameUtils.setBoard(new Board());
+        GameUtils.getGameBoardObject().createNewBoard(size);
     }
 
     private static void playRound() {
