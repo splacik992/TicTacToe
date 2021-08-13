@@ -37,13 +37,6 @@ class GameLogicTest {
     }
 
     @Test
-    void checkIfWin() {
-        Board board = new Board();
-        board.createNewBoard(3);
-        GameUtils.setBoard(board);
-    }
-
-    @Test
     void shouldReturnWinForDiagonal(){
         Board board = new Board();
         board.createNewBoard(3);
