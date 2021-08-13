@@ -7,60 +7,67 @@ import java.util.Scanner;
 //stan gry
 public class GameService {
     private static boolean firstPlayer = true;
-    public static void run() {
 
+    public static void run() {
         while (true) {
             Scanner scanner = new Scanner(System.in);
-                Menu.printChoiceGameModeMenu();
-                String choice = scanner.next();
-
-                switch (choice) {
-                    case "1":
-                        modeWithTwoPlayers(scanner);
-                        GameUtils.isGameActive = true;
-                        System.out.println("Powodzenia!");
-                        while (true) {
-                            if(GameUtils.isGameActive) {
-                                printGameBoard();
-                                System.out.println("Ruch gracza: " + (firstPlayer ? "X" : "O"));
-                                playerMove(scanner);
-                            } else {
-                                break;
-                            }
+            System.out.println("Wybierz: \n" +
+                    "1. Rozpocznij gre \n" +
+                    "0. Zakończ gre");
+            String choice = scanner.next();
+            switch (choice) {
+                case "1":
+                    modeWithTwoPlayers(scanner);
+                    GameUtils.isGameActive = true;
+                    System.out.println("Powodzenia!");
+                    while (true) {
+                        if (GameUtils.isGameActive) {
+                            printGameBoard();
+                            System.out.println("Ruch gracza: " + (firstPlayer ? "X" : "O"));
+                            playerMove(scanner);
+                        } else {
+                            break;
                         }
-                        break;
-                    case "2":
-                        System.out.println("Podaj nazwę gracza : ");
-                        Player player = new Player(scanner.next());
-                        break;
-                    case "0":
-                        System.exit(0);
-                        System.out.println("Dzięki za gre :)");
-                    default:
-                        System.out.println("Podana opcja nie istnieje");
-                }
+                    }
+                    break;
+                case "0":
+                    System.exit(0);
+                    System.out.println("Dzięki za gre :)");
+                default:
+                    System.out.println("Podana opcja nie istnieje");
+            }
         }
     }
 
     private static void playerMove(Scanner scanner) {
         while (true) {
-            System.out.println("Podaj wspolrzedna X:");
+            System.out.println("Podaj wspolrzedna Y:");
             String x = scanner.next();
 
-            System.out.println("Podaj wspolrzedna Y:");
+            System.out.println("Podaj wspolrzedna X:");
             String y = scanner.next();
 
             if (StringUtils.isNumeric(x) && StringUtils.isNumeric(y)) {
-                // TODO czy x i y mniejsze niz n
-                if(GameLogic.makeMove(Integer.parseInt(x), Integer.parseInt(y), firstPlayer)) {
-                    if(GameLogic.checkIfWin(firstPlayer)) {
-                        GameUtils.isGameActive = false;
-                        System.out.println("Wygrał gracz" + (firstPlayer ? "X" : "O"));
-                    }
-                    firstPlayer = !firstPlayer;
-                    break;
+                if (Integer.parseInt(x) > GameUtils.getGameBoardObject().getBoard().length - 1 ||
+                        Integer.parseInt(y) > GameUtils.getGameBoardObject().getBoard().length - 1
+                        || Integer.parseInt(x) < 1 || Integer.parseInt(y) < 1) {
+                    System.out.println("Wpółrzędne wychodzą poza zakres planszy!");
                 } else {
-                    System.out.println("To pole jest już zajęte");
+                    if (GameLogic.makeMove(Integer.parseInt(x), Integer.parseInt(y), firstPlayer)) {
+                        GameStatus status = GameLogic.checkIfWin(firstPlayer);
+                        if (status == GameStatus.WIN) {
+                            GameUtils.isGameActive = false;
+                            System.out.println("Wygrał gracz " + (firstPlayer ? "X" : "O"));
+                        } else if (status == GameStatus.DRAW) {
+                            GameUtils.isGameActive = false;
+                            System.out.println("REMIS");
+                        }
+                        firstPlayer = !firstPlayer;
+                        break;
+
+                    } else {
+                        System.out.println("To pole jest już zajęte");
+                    }
                 }
             } else {
                 System.out.println("Niepoprawne współrzędne");
@@ -69,14 +76,14 @@ public class GameService {
     }
 
     private static void printGameBoard() {
-        GameUtils.getBoard().printBoard();
+        GameUtils.getGameBoardObject().printBoard();
     }
 
     private static void createBoard(String n) {
         try {
             int size = Integer.parseInt(n);
             GameUtils.setBoard(new Board());
-            GameUtils.getBoard().createNewBoard(size);
+            GameUtils.getGameBoardObject().createNewBoard(size);
 
         } catch (IllegalArgumentException e) {
             throw new IllegalArgumentException(MessageUtils.INVALID_INPUT_SIZE_MESSAGE);
@@ -84,11 +91,6 @@ public class GameService {
     }
 
     private static void modeWithTwoPlayers(Scanner scanner) {
-
-        System.out.println("Podaj nazwę gracza nr 1: ");
-        GameUtils.setPlayer1(new Player(scanner.next()));
-        System.out.println("Podaj nazwę gracza nr 2: ");
-        GameUtils.setPlayer2(new Player(scanner.next()));
 
         while (true) {
             System.out.println("Podaj rozmiar planszy (rekomendowana 3-5):");
@@ -104,6 +106,5 @@ public class GameService {
                 System.out.println("Podana wartość musi być liczbą!");
             }
         }
-
     }
 }

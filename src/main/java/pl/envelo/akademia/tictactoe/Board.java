@@ -7,8 +7,15 @@ public class Board {
 
     private int[][] board;
 
+
     public void createNewBoard(int n) {
-        this.board = prepareNewBoard(n);
+        int[][] arr = new int[n + 1][n + 1];
+        arr[0][0] = 0;
+        for (int i = 1; i < arr.length; i++) {
+            arr[i][0] = i;
+            arr[0][i] = i;
+        }
+        this.board = arr;
     }
 
     public void printBoard() {
@@ -35,15 +42,7 @@ public class Board {
         }
     }
 
-    private int[][] prepareNewBoard(int n) {
-        int[][] arr = new int[n + 1][n + 1];
-        arr[0][0] = 0;
-        for (int i = 1; i < arr.length; i++) {
-            arr[i][0] = i;
-            arr[0][i] = i;
-        }
-        return arr;
-    }
+
 
     public int[][] getBoard() {
         return board;

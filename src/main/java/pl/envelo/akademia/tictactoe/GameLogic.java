@@ -1,30 +1,47 @@
 package pl.envelo.akademia.tictactoe;
-//sprawdzanie wygranej np wykonanie ruchow
+
+
 public class GameLogic {
 
+    private static int moveCouter = 0;
+
     public static boolean makeMove(int x, int y, boolean firstPlayer) {
-        int[][] board = GameUtils.getBoard().getBoard();
+        int[][] board = GameUtils.getGameBoardObject().getBoard();
 
         if (board[x][y] == 0) {
             int currentPlayer = firstPlayer ? 1 : 2;
             board[x][y] = currentPlayer;
-            GameUtils.getBoard().setBoard(board);
+            GameUtils.getGameBoardObject().setBoard(board);
+            moveCouter++;
             return true;
         } else {
             return false;
         }
     }
 
-    public static boolean checkIfWin(boolean firstPlayer) {
+    //zmian na actual player
+    public static GameStatus checkIfWin(boolean firstPlayer) {
         int currentPlayer = firstPlayer ? 1 : 2;
 
-        return checkBiases(currentPlayer) ||
+        if (checkBiases(currentPlayer) ||
                 checkHorizontal(currentPlayer) ||
-                checkVertical(currentPlayer);
+                checkVertical(currentPlayer)) {
+            return GameStatus.WIN;
+        } else if (checkIfDraw()) {
+            return GameStatus.DRAW;
+        }
+
+        return null;
+    }
+
+    private static boolean checkIfDraw() {
+        int[][] board = GameUtils.getGameBoardObject().getBoard();
+
+        return moveCouter == Math.pow(board.length - 1, 2);
     }
 
     private static boolean checkVertical(int currentPlayer) {
-        int[][] board = GameUtils.getBoard().getBoard();
+        int[][] board = GameUtils.getGameBoardObject().getBoard();
 
         int counter = 0;
 
@@ -44,7 +61,7 @@ public class GameLogic {
     }
 
     private static boolean checkHorizontal(int currentPlayer) {
-        int[][] board = GameUtils.getBoard().getBoard();
+        int[][] board = GameUtils.getGameBoardObject().getBoard();
 
         int counter = 0;
 
@@ -59,12 +76,11 @@ public class GameLogic {
             }
             counter = 0;
         }
-
         return false;
     }
 
     private static boolean checkBiases(int currentPlayer) {
-        int[][] board = GameUtils.getBoard().getBoard();
+        int[][] board = GameUtils.getGameBoardObject().getBoard();
 
         int leftBias = 0;
         int rightBias = 0;
